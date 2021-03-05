@@ -151,3 +151,13 @@ C:\Users\roscha\training\Bookish\obj\Debug\net5.0\Razor\Views\Members\MemberList
 C:\Users\roscha\training\Bookish\obj\Debug\net5.0\Razor\Views\Members\MemberAdd.cshtml.g.cs
 C:\users\roscha\training\bookish\obj\Debug\net5.0\Razor\Views\Copy\CopyAdd.cshtml.g.cs
 C:\users\roscha\training\bookish\obj\Debug\net5.0\Razor\Views\Copy\CopyAddError.cshtml.g.cs
+C:\users\roscha\training\bookish\obj\Debug\net5.0\Razor\Views\Copy\FindCopies.cshtml.g.cs
+C:\users\roscha\training\bookish\obj\Debug\net5.0\Razor\Views\Copy\CopiesList.cshtml.g.cs
+C:\users\roscha\training\bookish\obj\Debug\net5.0\Razor\Views\Members\FindMemberBooks.cshtml.g.cs
+C:\users\roscha\training\bookish\obj\Debug\net5.0\Razor\Views\Members\MemberBookList.cshtml.g.cs
+C:\users\roscha\training\bookish\obj\Debug\net5.0\Razor\Views\Books\BookSearch.cshtml.g.cs
+C:\users\roscha\training\bookish\obj\Debug\net5.0\Razor\Views\Books\BookSearchList.cshtml.g.cs
+C:\users\roscha\training\bookish\obj\Debug\net5.0\Razor\Views\Members\UpdateMemberInfo.cshtml.g.cs
+C:\users\roscha\training\bookish\obj\Debug\net5.0\Razor\Views\Members\UpdateMemberSearch.cshtml.g.cs
+C:\users\roscha\training\bookish\obj\Debug\net5.0\Razor\Views\Members\MemberSearch.cshtml.g.cs
+C:\users\roscha\training\bookish\obj\Debug\net5.0\Razor\Views\Members\MemberSearchList.cshtml.g.cs

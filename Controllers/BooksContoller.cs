@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Bookish.Models;
-
+// using System.Data;
+// using System.Data.Entity;
+// using System.Data.Entity.Infrastructure;
+// using System.Data.Entity.Core.Objects;
+using Microsoft.EntityFrameworkCore;
 
 namespace Bookish.Controllers
 {
@@ -17,13 +21,47 @@ namespace Bookish.Controllers
         {
             _logger = logger;
         }
+
+        public IActionResult BookSearch()
+        {
+            return View();
+        }
+
+        public IActionResult BookSearchList(String BookId, String TitleP, String Title, String Author, String Year)
+        {
+            // Console.WriteLine(book.Title.GetType());
+            var context = new BookishContext();
+            var booklist = context.Books.AsQueryable();
+            if (!String.IsNullOrEmpty(BookId)){
+                booklist = booklist.Where(s => s.BookId == Int32.Parse(BookId));
+            }
+            if (!String.IsNullOrEmpty(TitleP)){
+                booklist = booklist.Where(s => s.Title.Contains(TitleP));
+            }
+            if (!String.IsNullOrEmpty(Title)){
+                booklist = booklist.Where(s => s.Title == Title);
+            }
+            if (!String.IsNullOrEmpty(Author)){
+                booklist =  booklist.Where(s => s.Author.Contains(Author));
+            }
+            if (!String.IsNullOrEmpty(Year)){
+                booklist = booklist.Where(s => s.Year == Int32.Parse(Year));
+            }
+            var books = booklist.OrderBy(x => x.Title).ToList();
+            var list = new BookListViewModel(books);
+            return View(list);
+            // return RedirectToAction ("BookList");
+        }
+
+
         public IActionResult BookList()
         {
 
             var context = new BookishContext();
             var booklist = context.Books
-                                //    .Where(s => s.Author == "George RR Martin")
+                                   .OrderBy(x => x.Title)
                                    .ToList();
+                                
             var list = new BookListViewModel(booklist);
             return View(list);
         }
@@ -36,10 +74,8 @@ namespace Bookish.Controllers
         public IActionResult BookInsert(Book newbook)
         {
             
-            // Console.WriteLine (newbook);
             using (var context = new BookishContext())
             {
-                // move the values obtained from the form to the variable book
                 var book = new Book()
                 {
                     Title = newbook.Title,

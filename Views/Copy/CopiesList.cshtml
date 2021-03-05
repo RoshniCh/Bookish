@@ -1,0 +1,79 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model Bookish.Models.CopyListViewModel;
+
+<div class="text-center">
+    <h1 class="display-4">Copy List</h1>
+
+   <div>
+       <p>Number of copies in the library : @Model.NumberofCopies</p>
+       <p>Number of copies available : @Model.AvailableCopies</p>
+
+       <h3>Books issued to members</h3>
+        <table style="width: 100%" border="solid">
+
+        <tr>
+            <th>Copy Id</th>
+            <th>Book Id</th>
+            <th>Book Name</th>
+            <th>Member Id</th>
+            <th>Member Name</th>
+            <th>Issue date</th>
+            <th>Due date</th>
+        </tr>
+        @foreach (var copy in @Model.TakenList)
+        {
+            <tr>
+                <td>@copy.CopyId</td>
+                <td>@copy.BookId</td>
+                <td>@copy.Book.Title</td>
+                <td>@copy.MemberId</td>
+                <td>@copy.Member.Name</td>
+                <td>@copy.IssueDate</td>
+                <td>@copy.DueDate</td>
+            </tr>
+            
+        }
+        </table>
+         <h4>Return Books</h4>
+             <form asp-area="" asp-controller="Copy" asp-action="ReturnB" method="get">
+                <label for="title">Copy Id:</label><br>
+                <input type="number" id="copyid" name="CopyId" required><br>
+                <label for="title">Book Id:</label><br>
+                <input type="number" id="bookid" name="BookId" required><br>
+                <input type="submit" value="Submit" >
+             </form>
+
+        <h3>Books available in the library</h3>
+        <table style="width: 100%" border="solid">
+
+            <tr>
+                <th>Copy Id</th>
+                <th>Book Id</th>
+                <th>Book Name</th>
+            </tr>
+            @foreach (var copy in @Model.AvailableList)
+            {
+                <tr>
+                    <td>@copy.CopyId</td>
+                    <td>@copy.BookId</td>
+                    <td>@copy.Book.Title</td>
+                </tr>
+                
+            }
+            </table>
+                <h4>Checkout Books</h4>
+             <form asp-area="" asp-controller="Copy" asp-action="Checkout" method="get">
+                <label for="title">Copy Id:</label><br>
+                <input type="number" id="copyid" name="CopyId" required><br>
+                <label for="title">Book Id:</label><br>
+                <input type="number" id="bookid" name="BookId" required> <br>
+                <label for="memberid">Member Id:</label><br>
+                <input type="number" id="memberid" name="MemberId" required><br>
+                <input type="submit" value="Submit" >
+             </form>
+
+    </div>
+</div>

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Bookish.Models;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace Bookish.Controllers
@@ -17,16 +18,6 @@ namespace Bookish.Controllers
         {
             _logger = logger;
         }
-        // public IActionResult CopyList()
-        // {
-
-        //     var context = new BookishContext();
-        //     var booklist = context.Books
-        //                         //    .Where(s => s.Author == "George RR Martin")
-        //                            .ToList();
-        //     var list = new BookListViewModel(booklist);
-        //     return View(list);
-        // }
         public IActionResult CopyAdd()
         {
             return View();
@@ -74,6 +65,114 @@ namespace Bookish.Controllers
         {
             return View();
         }
+
+        public IActionResult CopyDelete(String CopyId)
+        {
+            var copy = new Copy(){CopyId = Int32.Parse(CopyId)};
+            using (var context = new BookishContext())
+            {
+                context.Remove<Copy>(copy);
+                context.SaveChanges(); 
+            }
+            
+            return RedirectToAction("CopyAdd");
+        }
+
+        public IActionResult FindCopies()
+        {
+            return View();
+        }
+        
+        public IActionResult CopiesList(FindCopy find) 
+        {
+            if (find.Title != null)
+            {
+                var bookTitle = find.Title;
+                var context = new BookishContext();
+                var availableList = context.Copies_Book_Member
+                                    .Where(s => s.Book.Title.Contains(bookTitle))
+                                    .Where(s => s.MemberId == null)
+                                    .Include(c => c.Book)
+                                    .ToList();
+
+                var takenList = context.Copies_Book_Member
+                                    .Where(s => s.Book.Title.Contains(bookTitle))
+                                    .Where(s => s.MemberId != null)
+                                    .Include(c => c.Book)
+                                    .Include(m => m.Member)
+                                    .ToList();                      
+
+                var numofcopies = availableList.Count + takenList.Count;
+                var numAvailable = availableList.Count;
+                var list = new CopyListViewModel(numofcopies, numAvailable, takenList, availableList);
+                return View(list);
+            } 
+            else 
+              { 
+                var bookId = find.BookId;
+                var context = new BookishContext();
+                var availableList = context.Copies_Book_Member
+                                    .Where(s => s.BookId == bookId)
+                                    .Where(s => s.MemberId == null)
+                                    .Include(c => c.Book)
+                                    .ToList();
+
+                var takenList = context.Copies_Book_Member
+                                    .Where(s => s.BookId == bookId)
+                                    .Where(s => s.MemberId != null)
+                                    .Include(c => c.Book)
+                                    .Include(m => m.Member)
+                                    .ToList();                      
+
+                var numofcopies = availableList.Count + takenList.Count;
+                var numAvailable = availableList.Count;
+                var list = new CopyListViewModel(numofcopies, numAvailable, takenList, availableList);
+                return View(list);
+            }
+
+        }
+
+
+        public IActionResult Checkout(String CopyId, String BookId, String MemberId)
+        {
+            //copy has to be populated
+                // var context = new BookishContext();
+                // var copy = context.Copies_Book_Member
+                //                     .Where(s => s.CopyId == Int32.Parse(CopyId))
+                //                     .ToList()
+
+            var copy = new Copy(){CopyId = Int32.Parse(CopyId), BookId = Int32.Parse(BookId)};
+            // MemberId = Int32.Parse(MemberId), IssueDate = DateTime.Now, DueDate = DateTime.Now.AddDays(14)
+        
+            copy.MemberId = Int32.Parse(MemberId);
+            copy.IssueDate = DateTime.Now;
+            copy.DueDate = DateTime.Now.AddDays(14);
+            
+            using (var context = new BookishContext())
+            {
+                context.Update<Copy>(copy);
+                context.SaveChanges(); 
+            }
+
+            return RedirectToAction ("FindCopies");
+        } 
+
+        public IActionResult ReturnB(String CopyId, String BookId)
+        {
+            var copy = new Copy(){CopyId = Int32.Parse(CopyId), BookId = Int32.Parse(BookId)};
+        
+            copy.MemberId = null;
+            copy.IssueDate = null;
+            copy.DueDate = null;
+            
+            using (var context = new BookishContext())
+            {
+                context.Update<Copy>(copy);
+                context.SaveChanges(); 
+            }
+
+            return RedirectToAction ("FindCopies");
+        } 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

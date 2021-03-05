@@ -27,13 +27,18 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Books" asp-action="BookList">Book List</a>
                             <a class="nav-link text-dark" asp-area="" asp-controller="Books" asp-action="BookAdd">Add Book</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Books" asp-action="BookSearch">Search Book</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Members" asp-action="MemberList">Member List</a>
                             <a class="nav-link text-dark" asp-area="" asp-controller="Members" asp-action="MemberAdd">Add Member</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Members" asp-action="FindMemberBooks">Member Books</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Members" asp-action="UpdateMemberSearch">Update Member</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Members" asp-action="MemberSearch">Member Search</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Copy" asp-action="CopyAdd">Add Copy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Copy" asp-action="CopyAdd">Manage Copy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Copy" asp-action="FindCopies">Find Copies</a>
                         </li>
                     </ul>
                 </div>

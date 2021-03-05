@@ -1,0 +1,19 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="text-center">
+<h1 class="display-4">Find Members</h1>
+
+    <div>
+        <form asp-area="" asp-controller="Members" asp-action="MemberSearchList" method="get">
+            <label for="memberid">Member ID:</label><br>
+            <input type="number" id="title" name="MemberId"><br>
+
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="Name"><br>
+            <input type="submit" value="Submit" >
+        </form>
+    </div>
+</div>

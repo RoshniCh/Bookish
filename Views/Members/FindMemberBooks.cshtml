@@ -1,0 +1,23 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model Bookish.Models.FindMemberBook;
+
+<div class="text-center">
+<h1 class="display-4">Find Books for Member</h1>
+
+    <div>
+        <form asp-area="" asp-controller="Members" asp-action="MemberBookList" method="post">
+            <label for="memberid">Member ID:</label><br>
+            <input type="text" id="memberid" name="MemberId" required><br>
+            <input type="submit" value="Submit" >
+        </form>
+
+        @* <form asp-area="" asp-controller="Copy" asp-action="CopiesList" method="post">
+            <label for="title">Title:</label><br>
+            <input type="text" id="title" name="Title"><br>
+            <input type="submit" value="Submit" >
+        </form> *@
+    </div>
+</div>

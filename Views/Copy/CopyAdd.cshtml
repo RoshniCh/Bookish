@@ -5,14 +5,24 @@
 @model Bookish.Models.CopyAdd;
 
 <div class="text-center">
-    <h1 class="display-4">Add Copy of Book</h1>
+    <h2 class="display-4">Add Copy of Book</h1>
 
    <div>
         <form asp-area="" asp-controller="Copy" asp-action="CopyInsert" method="post">
             <label for="title">BookId:</label><br>
-            <input type="text" id="bookid" name="BookId"><br>
+            <input type="text" id="bookid" name="BookId" required><br>
             <label for="author">Number of Copies:</label><br>
-            <input type="text" id="numberofcopies" name="NumberofCopies"><br>
+            <input type="text" id="numberofcopies" name="NumberofCopies" required><br>
+            <input type="submit" value="Submit" >
+        </form>
+    </div>
+
+    <h2 class="display-4">Delete Copy of Book</h2>
+
+   <div>
+        <form asp-area="" asp-controller="Copy" asp-action="CopyDelete" method="get">
+            <label for="title">CopyId:</label><br>
+            <input type="text" id="copyid" name="CopyId" required><br>
             <input type="submit" value="Submit" >
         </form>
     </div>

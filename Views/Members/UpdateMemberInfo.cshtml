@@ -1,0 +1,24 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model Bookish.Models.Member;
+
+<div class="text-center">
+    <h1 class="display-4">Change member details</h1>
+
+   <div>
+        <form asp-area="" asp-controller="Members" asp-action="MemberChange" method="get">
+            <label for="memberid">Member Id : @Model.MemberId</label><br>
+            <input type="text" id="memberid" name="MemberId" value=@Model.MemberId hidden><br>
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="Name" value=@Model.Name required><br>
+            <label for="contactno">Contact No:</label><br>
+            <input type="text" id="contactno" name="ContactNo" value=@Model.ContactNo required><br>
+            <label for="email">Email:</label><br>
+            <input type="text" id="email" name="Email" value=@Model.Email required><br>
+            <input type="submit" value="Submit" >
+            <input type="reset" value="Reset">
+        </form>
+    </div>
+</div>

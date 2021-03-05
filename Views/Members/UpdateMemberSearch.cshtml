@@ -1,0 +1,18 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model Bookish.Models.FindMemberBook;
+
+<div class="text-center">
+<h1 class="display-4">Update Member Info</h1>
+
+    <div>
+        <form asp-area="" asp-controller="Members" asp-action="UpdateMemberInfo" method="get">
+            <label for="memberid">Member ID:</label><br>
+            <input type="text" id="memberid" name="MemberId" required><br>
+            <input type="submit" value="Submit" >
+        </form>
+  
+    </div>
+</div>

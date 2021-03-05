@@ -10,11 +10,11 @@
    <div>
         <form asp-area="" asp-controller="Members" asp-action="MemberInsert" method="post">
             <label for="name">Name:</label><br>
-            <input type="text" id="name" name="Name"><br>
+            <input type="text" id="name" name="Name" required><br>
             <label for="contactno">Contact No:</label><br>
-            <input type="text" id="contactno" name="ContactNo"><br>
+            <input type="text" id="contactno" name="ContactNo" required><br>
             <label for="email">Email:</label><br>
-            <input type="text" id="email" name="Email"><br>
+            <input type="text" id="email" name="Email" required><br>
             <input type="submit" value="Submit" >
         </form>
     </div>
